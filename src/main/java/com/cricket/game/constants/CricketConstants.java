@@ -4,6 +4,10 @@ public class CricketConstants {
 
     public static final String WICKET="w";
     public static final String WON_THE_MATCH=" Won the match";
+    public static final String BATSMAN="Batsman ";
+    public static final String OUT=" (out)";
+    public static final String NOT_OUT=" (not out)";
+
 
 
 }

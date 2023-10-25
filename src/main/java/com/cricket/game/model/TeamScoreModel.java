@@ -13,5 +13,6 @@ public class TeamScoreModel {
     private long totalScore;
     private int totalWicket;
     private int totalOver;
+    private HashMap<String,Integer> batsmanLIst;
 
 }
