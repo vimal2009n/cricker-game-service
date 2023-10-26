@@ -1,18 +1,16 @@
-package com.cricket.game.model;
+package com.cricket.game.entity;
 
 import lombok.Data;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Data
-public class TeamScoreModel {
+public class TeamEntity {
 
     private int id;
     private String teamName;
+    List<PlayerEntity> players;
     private long totalScore;
     private int totalWicket;
     private int totalOver;
-    private HashMap<String,Integer> batsmanLIst;
-
 }
