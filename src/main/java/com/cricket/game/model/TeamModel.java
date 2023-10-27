@@ -20,4 +20,5 @@ public class TeamModel {
 
     List<String>  bowlersList;
     private String battingTeam;
+    private String bowlingTeam;
 }
