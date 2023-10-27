@@ -86,7 +86,7 @@ public class CricketGameServiceImpl implements CricketGameService {
     public void setOutBatmanScore(int score,String batsman){
 
         int newScore=score-oldScore;
-        batsmanList.put(batsman,newScore);
+        batsmanList.put(batsman+CricketConstants.OUT ,newScore);
         oldScore=score;
 
     }
