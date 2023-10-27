@@ -25,6 +25,8 @@ public class CricketGameServiceImpl implements CricketGameService {
 
         TeamModel teamModel=new TeamModel();
         teamModel.setTeamName(teamA.getTeamName());
+        teamModel.setBattingTeam(teamA.getTeamName());
+        teamModel.setBowlingTeam(teamB.getTeamName());
         batsmanList=new LinkedHashMap<>();
 
         int numberOfWicket = teamA.getPlayers().size();
