@@ -7,6 +7,7 @@ public class CricketConstants {
     public static final String BATSMAN="Batsman ";
     public static final String OUT=" (out)";
     public static final String NOT_OUT=" (not out)";
+    public static final String WICKET_TAKEN=" took ";
 
 
 

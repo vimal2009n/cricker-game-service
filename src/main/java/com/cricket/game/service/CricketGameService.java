@@ -1,11 +1,11 @@
 package com.cricket.game.service;
 
 import com.cricket.game.entity.TeamEntity;
-import com.cricket.game.model.CricketMatchModel;
+import com.cricket.game.model.CricketMatchResponseModel;
+import com.cricket.game.model.TeamModel;
 
 public interface CricketGameService {
 
-    TeamEntity playMatch(TeamEntity teamModel);
-
-    CricketMatchModel findMatchResult(TeamEntity teamA, TeamEntity teamB);
+    TeamModel playMatch(TeamEntity teamAModel,TeamEntity teamBModel);
+    CricketMatchResponseModel findMatchResult(TeamModel teamA, TeamModel teamB);
 }
