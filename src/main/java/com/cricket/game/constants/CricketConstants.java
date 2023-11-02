@@ -8,6 +8,7 @@ public class CricketConstants {
     public static final String OUT=" (out)";
     public static final String NOT_OUT=" (not out)";
     public static final String WICKET_TAKEN=" took ";
+    public static final String DATE_FORMAT="MM/dd/yyyy";
 
 
 
