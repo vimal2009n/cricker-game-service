@@ -14,7 +14,6 @@ public class InningsDetailsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
     @Column(name = "innings_number")
     private int inningsNumber;
 

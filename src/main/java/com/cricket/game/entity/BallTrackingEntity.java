@@ -12,13 +12,6 @@ public class BallTrackingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-   /* @Column(name ="innings_id" )
-    private long innigsId;
-
-    @Column(name ="innings_over_id" )
-    private long innigsOverId;*/
-
-
     @Column(name ="batsman_id" )
     private long batsManId;
 

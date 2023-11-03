@@ -17,24 +17,50 @@ public class PlayerController {
     private PlayersService playersService;
 
     @PostMapping(CricketApiConstants.SAVE_PLAYER)
-    ResponseEntity<PlayersMapperModel> savePlayer(@RequestBody PlayersMapperModel model){
+    ResponseEntity<Object> savePlayer( @RequestBody PlayersMapperModel model){
 
-        PlayersMapperModel responseModel = playersService.savePlayer(model);
-        return ResponseEntity.ok().body(responseModel);
+        try {
+            PlayersMapperModel responseModel = playersService.savePlayer(model);
+            return ResponseEntity.ok().body(responseModel);
+        }catch (Exception e){
+            return ResponseEntity.ok().body(e.getMessage());
+        }
+
+    }
+    @PutMapping(CricketApiConstants.UPDATE_PLAYER)
+    ResponseEntity<Object> updatePlayer(@RequestBody PlayersMapperModel model){
+
+        try {
+            PlayersMapperModel responseModel = playersService.updatePlayer(model);
+            return ResponseEntity.ok().body(responseModel);
+        }catch (Exception e){
+            return ResponseEntity.ok().body(e.getMessage());
+        }
+
     }
 
     @GetMapping(CricketApiConstants.GET_ALL_PLAYER)
-    ResponseEntity<List<PlayersMapperModel>> getAllPlayers(){
+    ResponseEntity<Object> getAllPlayers(){
 
-        List<PlayersMapperModel> allPlayers = playersService.getAllPlayer();
-        return ResponseEntity.ok().body(allPlayers);
+        try {
+            List<PlayersMapperModel> allPlayers = playersService.getAllPlayer();
+            return ResponseEntity.ok().body(allPlayers);
+        }catch (Exception e){
+            return ResponseEntity.ok().body(e.getMessage());
+        }
+
     }
 
     @GetMapping(CricketApiConstants.GET_PLAYER_BY_TEAM_ID)
-    ResponseEntity<List<PlayersMapperModel>> getPlayersByTeamId(@RequestParam long teamId){
+    ResponseEntity<Object> getPlayersByTeamId(@RequestParam long teamId){
 
-        List<PlayersMapperModel> playersListByTeamId = playersService.getPlayersByTeamId(teamId);
-        return ResponseEntity.ok().body(playersListByTeamId);
+        try {
+            List<PlayersMapperModel> playersListByTeamId = playersService.getPlayersByTeamId(teamId);
+            return ResponseEntity.ok().body(playersListByTeamId);
+        }catch (Exception e){
+            return ResponseEntity.ok().body(e.getMessage());
+        }
+
     }
 
     @DeleteMapping(CricketApiConstants.DELETE_PLAYER_BY_ID)

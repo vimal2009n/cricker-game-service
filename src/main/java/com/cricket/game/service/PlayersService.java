@@ -7,11 +7,9 @@ import java.util.List;
 public interface PlayersService {
 
     PlayersMapperModel savePlayer(PlayersMapperModel model);
-
+    PlayersMapperModel updatePlayer(PlayersMapperModel model);
     List<PlayersMapperModel> getAllPlayer();
-
     List<PlayersMapperModel> getPlayersByTeamId(long id);
-
     void deletePlayerByID(long id);
 
 }

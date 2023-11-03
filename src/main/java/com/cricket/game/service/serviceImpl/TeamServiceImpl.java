@@ -1,6 +1,7 @@
 package com.cricket.game.service.serviceImpl;
 
 import com.cricket.game.entity.Team;
+import com.cricket.game.entity.TeamEntity;
 import com.cricket.game.mapper.TeamMapper;
 import com.cricket.game.model.TeamMapperModel;
 import com.cricket.game.model.TeamModel;
@@ -26,27 +27,34 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public TeamMapperModel saveTeam(TeamMapperModel model) {
 
-        Team response = null;
-        Team teamEntity = teamMapper.mapTeamModelToTeamEntity(model);
-;
-        if(teamEntity.getId()==null){
+        TeamMapperModel responseModel=new TeamMapperModel();
+        Team response ;
+        boolean value = validateTeamName(model);
+        if(value) {
+            Team teamEntity = teamMapper.mapTeamModelToTeamEntity(model);
 
-            Team newTeam=new Team();
+            Team newTeam = new Team();
             newTeam.setTeamName(teamEntity.getTeamName());
-            response=teamRepository.save(newTeam);
+            response = teamRepository.save(newTeam);
 
-        }else {
-
-            Optional<Team> existTeam = teamRepository.findById(teamEntity.getId());
-            if(existTeam.isPresent()){
-
-                existTeam.get().setTeamName(teamEntity.getTeamName());
-                response=teamRepository.save(existTeam.get());
-            }
+             responseModel = teamMapper.mapTeamEntityToTeamModel(response);
         }
 
-        TeamMapperModel responseModel = teamMapper.mapTeamEntityToTeamModel(response);
+        return responseModel;
+    }
 
+    @Override
+    public TeamMapperModel updateTeam(TeamMapperModel model) {
+
+        Team response = null;
+        Team teamEntity = teamMapper.mapTeamModelToTeamEntity(model);
+        Optional<Team> existTeam = teamRepository.findById(teamEntity.getId());
+        if(existTeam.isPresent()){
+
+            existTeam.get().setTeamName(teamEntity.getTeamName());
+            response=teamRepository.save(existTeam.get());
+        }
+        TeamMapperModel responseModel = teamMapper.mapTeamEntityToTeamModel(response);
         return responseModel;
     }
 
@@ -67,5 +75,20 @@ public class TeamServiceImpl implements TeamService {
     public void removeTeamById(long teamId) {
 
         teamRepository.deleteById(teamId);
+    }
+
+
+    private boolean validateTeamName(TeamMapperModel teamModel) {
+
+        if (teamModel.getTeamName() != null) {
+
+            List<Team> teamList = teamRepository.findByTeamName(teamModel.getTeamName());
+
+            if (!teamList.isEmpty()) {
+
+                return false;
+            }
+        }
+      return  true;
     }
 }

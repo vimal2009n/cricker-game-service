@@ -8,6 +8,7 @@ import java.util.List;
 public interface TeamService {
 
     TeamMapperModel saveTeam(TeamMapperModel model);
+    TeamMapperModel updateTeam(TeamMapperModel model);
 
     List<TeamMapperModel>  getAllTeam();
 
