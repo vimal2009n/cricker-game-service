@@ -24,6 +24,12 @@ public class TeamController {
         TeamMapperModel team = teamService.saveTeam(model);
         return ResponseEntity.ok().body(team);
     }
+    @PutMapping(CricketApiConstants.UPDATE_TEAM)
+    public ResponseEntity<TeamMapperModel> updateTeam(@RequestBody TeamMapperModel model){
+
+        TeamMapperModel team = teamService.updateTeam(model);
+        return ResponseEntity.ok().body(team);
+    }
 
     @GetMapping(CricketApiConstants.GET_ALL_TEAM)
     public ResponseEntity<List<TeamMapperModel>> getAllTeam(){

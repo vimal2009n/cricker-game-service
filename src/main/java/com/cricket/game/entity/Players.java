@@ -1,6 +1,7 @@
 package com.cricket.game.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class Players {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "name is required")
     @Column(name = "player_name")
     private String playerName;
 

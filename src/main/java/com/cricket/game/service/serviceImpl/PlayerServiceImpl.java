@@ -26,26 +26,34 @@ public class PlayerServiceImpl implements PlayersService {
     @Override
     public PlayersMapperModel savePlayer(PlayersMapperModel model) {
 
-        Players response = null;
-        Players playerEntity = playerMapper.mapPlayerModelToPlayerEntity(model);
-
-        if(playerEntity.getId()==null){
+        PlayersMapperModel responseModel;
+        Players response;
+            Players playerEntity = playerMapper.mapPlayerModelToPlayerEntity(model);
 
             Players newPlayer=new Players();
             newPlayer.setPlayerName(playerEntity.getPlayerName());
             newPlayer.setTeam(playerEntity.getTeam());
             response=playerRepository.save(newPlayer);
-        }else {
 
-            Optional<Players> existPlayer = playerRepository.findById(playerEntity.getId());
-            if(existPlayer.isPresent()){
+             responseModel = playerMapper.mapPlayerEntityToPlayerModel(response);
 
-                existPlayer.get().setPlayerName(playerEntity.getPlayerName());
-                existPlayer.get().setTeam(playerEntity.getTeam());
-                response=playerRepository.save(existPlayer.get());
-            }
+
+        return responseModel;
+    }
+
+    @Override
+    public PlayersMapperModel updatePlayer(PlayersMapperModel model) {
+
+        Players response = new Players();
+        Players playerEntity = playerMapper.mapPlayerModelToPlayerEntity(model);
+        Optional<Players> existPlayer = playerRepository.findById(model.getId());
+
+        if(existPlayer.isPresent()){
+
+            existPlayer.get().setPlayerName(playerEntity.getPlayerName());
+            existPlayer.get().setTeam(playerEntity.getTeam());
+            response=playerRepository.save(existPlayer.get());
         }
-
         PlayersMapperModel responseModel = playerMapper.mapPlayerEntityToPlayerModel(response);
 
         return responseModel;

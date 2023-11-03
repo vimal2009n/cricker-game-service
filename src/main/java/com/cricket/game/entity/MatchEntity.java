@@ -17,7 +17,6 @@ public class MatchEntity {
     @Column(name = "teamA_id")
     private long teamAId;
 
-
     @Column(name = "teamB_id")
     private long teamBId;
 
@@ -32,6 +31,9 @@ public class MatchEntity {
 
     @Column(name = "match_summury")
     private String matchSummary;
+
+    @Column(name = "total_over")
+    private int totalOver;
 
 
 

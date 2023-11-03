@@ -15,12 +15,6 @@ public class InningsPerOverEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    /*@Column(name = "innings_id")
-    private long inningsId;*/
-
-  /*  @Column(name = "match_id")
-    private long matchId;*/
-
     @Column(name = "total_run_taken")
     private int totalRunTaken;
 
@@ -35,6 +29,9 @@ public class InningsPerOverEntity {
 
     @Column(name = "innings_number")
     private int inningsNumber;
+
+    @Column(name = "over_deatails")
+    private int numberOfOver;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
