@@ -17,10 +17,10 @@ public class InningsDetailsEntity {
     @Column(name = "innings_number")
     private int inningsNumber;
 
-    @Column(name = "batting_team_id")
+    @Column(name = "batting_team_id",nullable = false)
     private long battingTeamId;
 
-    @Column(name = "bowling_team_id")
+    @Column(name = "bowling_team_id",nullable = false)
     private long bowlingTeamId;
 
     @Column(name = "total_score")
@@ -33,7 +33,7 @@ public class InningsDetailsEntity {
     private int totalOver;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "matchId")
+    @JoinColumn(name = "matchId",nullable = false)
     private MatchEntity matchId;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "inningsId")

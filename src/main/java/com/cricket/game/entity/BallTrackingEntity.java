@@ -12,10 +12,10 @@ public class BallTrackingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name ="batsman_id" )
+    @Column(name ="batsman_id" ,nullable = false)
     private long batsManId;
 
-    @Column(name ="bowler_id" )
+    @Column(name ="bowler_id",nullable = false )
     private long bowlerId;
 
     @Column(name ="four" )
@@ -32,14 +32,14 @@ public class BallTrackingEntity {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "innings_id")
+    @JoinColumn(name = "innings_id",nullable = false)
     private InningsDetailsEntity inningsId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "innings_over_id")
+    @JoinColumn(name = "innings_over_id",nullable = false)
     private InningsPerOverEntity inningsPerOverId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "match_id")
+    @JoinColumn(name = "match_id",nullable = false)
     private MatchEntity matchId;
 }

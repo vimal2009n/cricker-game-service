@@ -15,12 +15,12 @@ public class Players {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "name is required")
-    @Column(name = "player_name")
+    @NotBlank(message = "player name is required")
+    @Column(name = "player_name",nullable = false)
     private String playerName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
+    @JoinColumn(name = "team_id",nullable = false)
     private Team team;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "playerId")
