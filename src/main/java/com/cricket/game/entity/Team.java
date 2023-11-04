@@ -1,6 +1,7 @@
 package com.cricket.game.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.List;
@@ -14,7 +15,8 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="team_name")
+    @NotBlank(message = "Team name is mandatory")
+    @Column(name="team_name",nullable = false)
     private String teamName;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "team")

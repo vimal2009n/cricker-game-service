@@ -3,11 +3,14 @@ package com.cricket.game.controller;
 import com.cricket.game.constants.CricketApiConstants;
 import com.cricket.game.model.PlayersMapperModel;
 import com.cricket.game.service.PlayersService;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestMapping(CricketApiConstants.PLAYER_API)
 @RestController
@@ -22,8 +25,8 @@ public class PlayerController {
         try {
             PlayersMapperModel responseModel = playersService.savePlayer(model);
             return ResponseEntity.ok().body(responseModel);
-        }catch (Exception e){
-            return ResponseEntity.ok().body(e.getMessage());
+        }catch (ConstraintViolationException e){
+            return getConstraintViolationMessage(e);
         }
 
     }
@@ -33,8 +36,8 @@ public class PlayerController {
         try {
             PlayersMapperModel responseModel = playersService.updatePlayer(model);
             return ResponseEntity.ok().body(responseModel);
-        }catch (Exception e){
-            return ResponseEntity.ok().body(e.getMessage());
+        }catch (ConstraintViolationException e){
+            return getConstraintViolationMessage(e);
         }
 
     }
@@ -68,5 +71,11 @@ public class PlayerController {
         playersService.deletePlayerByID(playerId);
     }
 
+    private ResponseEntity<Object> getConstraintViolationMessage(ConstraintViolationException e){
+        List<String> errorMessage = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.badRequest().body(errorMessage.get(0).toString());
+    }
 
 }

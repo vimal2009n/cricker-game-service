@@ -35,11 +35,11 @@ public class InningsPerOverEntity {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "match_id")
+    @JoinColumn(name = "match_id",nullable = false)
     private MatchEntity matchId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "innings_id")
+    @JoinColumn(name = "innings_id",nullable = false)
     private InningsDetailsEntity inningsId;
 
 

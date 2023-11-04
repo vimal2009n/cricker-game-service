@@ -2,6 +2,7 @@ package com.cricket.game.service.serviceImpl;
 
 import com.cricket.game.entity.Team;
 import com.cricket.game.entity.TeamEntity;
+import com.cricket.game.exception.CricketGameException;
 import com.cricket.game.mapper.TeamMapper;
 import com.cricket.game.model.TeamMapperModel;
 import com.cricket.game.model.TeamModel;
@@ -25,9 +26,9 @@ public class TeamServiceImpl implements TeamService {
     private TeamRepository teamRepository;
 
     @Override
-    public TeamMapperModel saveTeam(TeamMapperModel model) {
+    public TeamMapperModel saveTeam(TeamMapperModel model) throws CricketGameException {
 
-        TeamMapperModel responseModel=new TeamMapperModel();
+        TeamMapperModel responseModel;
         Team response ;
         boolean value = validateTeamName(model);
         if(value) {
@@ -38,6 +39,9 @@ public class TeamServiceImpl implements TeamService {
             response = teamRepository.save(newTeam);
 
              responseModel = teamMapper.mapTeamEntityToTeamModel(response);
+        }else {
+
+            throw new  CricketGameException("Team name already exist");
         }
 
         return responseModel;
@@ -47,6 +51,7 @@ public class TeamServiceImpl implements TeamService {
     public TeamMapperModel updateTeam(TeamMapperModel model) {
 
         Team response = null;
+
         Team teamEntity = teamMapper.mapTeamModelToTeamEntity(model);
         Optional<Team> existTeam = teamRepository.findById(teamEntity.getId());
         if(existTeam.isPresent()){
